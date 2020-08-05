@@ -32,16 +32,17 @@ head(df, 10)
 
 ```{r}
 ggplot(df, aes(date)) +
-  geom_line(aes(y=R2R_VWC, colour="Red")) +
-  geom_line(aes(y=R2Y_VWC, colour="Yellow")) +
-  geom_line(aes(y=R2B_VWC, colour="Blue")) +
-  geom_line(aes(y=R2P_VWC, colour="Purple")) +
-  geom_line(aes(y=R2W_VWC, colour="White")) +
+  geom_line(aes(y=R2R_VWC, colour="red")) +
+  geom_line(aes(y=R2Y_VWC, colour="yellow")) +
+  geom_line(aes(y=R2B_VWC, colour="blue")) +
+  geom_line(aes(y=R2P_VWC, colour="purple")) +
+  geom_line(aes(y=R2W_VWC, colour="white")) +
   ylab(expression(theta ~ (m^{3}  ~  m^{-3}))) +
   xlab(expression('')) +
   theme_classic() +
-  theme(legend.title=element_blank()) #+
-  scale_colour_brewer(palette = "Set2")
+  theme(legend.title=element_blank()) +
+  #scale_colour_brewer(palette = "Set2") +
+  scale_colour_manual(values = c(red="red", yellow="yellow", blue="blue", purple="purple", white="green"))
 
 ```
 
