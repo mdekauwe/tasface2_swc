@@ -1,0 +1,47 @@
+---
+title: "TASFACE2 SWC"
+output: html_notebook
+---
+
+```{r}
+library(plyr)
+library(ggplot2)
+```
+
+
+```{r}
+fn <- 'raw_data/TasFACE2-soil moisture_continuous.csv'
+header <- read.csv(fn, skip=1, header=F, nrows=1, as.is=T)
+df <- read.csv(fn, skip=4, header=F, na.strings="nan")
+names(df) <- header
+df <- rename(df, c('TIMESTAMP'='date'))
+df$date <- as.POSIXct(df$date, format='%d/%m/%Y %H:%M')
+
+```
+
+```{r}
+df$date[1]
+```
+
+
+```{r}
+head(df, 10)
+#tail(df$R2R_VWC, 10)
+```
+
+
+```{r}
+ggplot(df, aes(date)) +
+  geom_line(aes(y=R2R_VWC, colour="Red")) +
+  geom_line(aes(y=R2Y_VWC, colour="Yellow")) +
+  geom_line(aes(y=R2B_VWC, colour="Blue")) +
+  geom_line(aes(y=R2P_VWC, colour="Purple")) +
+  geom_line(aes(y=R2W_VWC, colour="White")) +
+  ylab(expression(theta ~ (m^{3}  ~  m^{-3}))) +
+  xlab(expression('')) +
+  theme_classic() +
+  theme(legend.title=element_blank()) #+
+  scale_colour_brewer(palette = "Set2")
+
+```
+
